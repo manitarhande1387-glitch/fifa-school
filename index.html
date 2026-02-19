@@ -20,32 +20,37 @@
 
 <script>
 
-let players=[];
+const API="https://fifa-school.onrender.com";  <!-- لینک سرورت -->
 
-function register(){
+async function register(){
 
- const player={
+ // اطلاعات رو به سرور می‌فرستیم
+ await fetch(API+"/register",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({
    name:name.value,
    className:class.value,
    phone:phone.value
- };
+  })
+ });
 
- players.push(player);
-
- alert("ثبت نام انجام شد ✅");
-
- showPlayers();
+ alert("ثبت شد ✅");
+ loadPlayers();
 }
 
-function showPlayers(){
- players.innerHTML="";
- document.getElementById("players").innerHTML="";
+async function loadPlayers(){
+ const res=await fetch(API+"/players");
+ const data=await res.json();
 
- players.forEach(p=>{
-   document.getElementById("players").innerHTML +=
-   `<li>${p.name} - ${p.className}</li>`;
+ document.getElementById("players").innerHTML="";
+ data.forEach(p=>{
+  document.getElementById("players").innerHTML+=`<li>${p.name} - ${p.className}</li>`;
  });
 }
+
+// وقتی سایت لود شد، لیست شرکت‌کننده‌ها رو نمایش بده
+loadPlayers();
 
 </script>
 
