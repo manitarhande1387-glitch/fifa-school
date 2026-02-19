@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>ثبت نام مسابقات فیفا</title>
+</head>
+
+<body style="font-family:tahoma;text-align:center">
+
+<h1>🏆 ثبت نام مسابقات FIFA دبیرستان امام رضا(ع)</h1>
+
+<input id="name" placeholder="نام و نام خانوادگی"><br><br>
+<input id="class" placeholder="کلاس"><br><br>
+<input id="phone" placeholder="شماره تماس"><br><br>
+
+<button onclick="register()">ثبت نام</button>
+
+<h2>شرکت کنندگان</h2>
+<ul id="players"></ul>
+
+<script>
+
+let players=[];
+
+function register(){
+
+ const player={
+   name:name.value,
+   className:class.value,
+   phone:phone.value
+ };
+
+ players.push(player);
+
+ alert("ثبت نام انجام شد ✅");
+
+ showPlayers();
+}
+
+function showPlayers(){
+ players.innerHTML="";
+ document.getElementById("players").innerHTML="";
+
+ players.forEach(p=>{
+   document.getElementById("players").innerHTML +=
+   `<li>${p.name} - ${p.className}</li>`;
+ });
+}
+
+</script>
+
+</body>
+</html>
